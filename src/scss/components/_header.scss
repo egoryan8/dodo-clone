@@ -4,14 +4,29 @@
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
 
+  @media (max-width: 768px) {
+    padding-bottom: 10px;
+  }
+
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 645px) {
+      flex-direction: column;
+
+      .header__cart {
+        margin-top: 40px;
+      }
+    }
   }
 
   &__logo {
     display: flex;
+    @media (max-width: 383px) {
+      padding-left: 30px;
+    }
 
     img {
       margin-right: 15px;
