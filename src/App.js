@@ -12,9 +12,7 @@ function App() {
 
   React.useEffect(() => {
     fetch('https://6295d76075c34f1f3b2280f4.mockapi.io/pizzas')
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((arr) => {
         setPizzas(arr);
       });
