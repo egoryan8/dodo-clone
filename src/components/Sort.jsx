@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSort } from '../redux/slices/filterSlice';
 
 const sortList = [
-  { name: 'популярности 🔽', sortProperty: 'rating' },
-  { name: 'популярности 🔼', sortProperty: '-rating' },
-  { name: 'цене 🔽', sortProperty: 'price' },
-  { name: 'цене 🔼', sortProperty: '-price' },
-  { name: 'алфавиту 🔽', sortProperty: 'name' },
-  { name: 'алфавиту 🔼', sortProperty: '-name' },
+  { name: 'популярности (убыв.)', sortProperty: 'rating' },
+  { name: 'популярности (возр.)', sortProperty: '-rating' },
+  { name: 'цене (убыв.)', sortProperty: 'price' },
+  { name: 'цене (возр.)', sortProperty: '-price' },
+  { name: 'алфавиту (убыв.)', sortProperty: 'name' },
+  { name: 'алфавиту (возр.)', sortProperty: '-name' },
 ];
 
 function Sort() {
