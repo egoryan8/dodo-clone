@@ -3,7 +3,7 @@
   margin: 0;
   list-style: none;
   outline: none;
-  font-family: "Nunito", Roboto, system-ui, Tahoma, sans-serif;
+  font-family: 'Nunito', Roboto, system-ui, Tahoma, sans-serif;
   box-sizing: border-box;
 }
 
@@ -141,7 +141,8 @@ a {
 .button--black {
   background-color: #232323;
 }
-.button--black:hover, .button--black:active {
+.button--black:hover,
+.button--black:active {
   background-color: #3d3d3d;
 }
 .button--outline {
@@ -286,7 +287,8 @@ a {
   padding: 12px 20px;
   cursor: pointer;
 }
-.sort__popup ul li.active, .sort__popup ul li:hover {
+.sort__popup ul li.active,
+.sort__popup ul li:hover {
   background: rgba(254, 95, 30, 0.05);
 }
 .sort__popup ul li.active {
@@ -606,7 +608,8 @@ body {
   height: 11.5px;
   position: relative;
 }
-.cart__item-remove .button:hover, .cart__item-remove .button:active {
+.cart__item-remove .button:hover,
+.cart__item-remove .button:active {
   border-color: #2a2a2a;
   background-color: #2a2a2a;
 }
