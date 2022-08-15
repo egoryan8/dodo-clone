@@ -38,7 +38,9 @@ const Home = ({ searchValue }) => {
         <Categories value={categoryId} onChangeCategory={(index) => setCategoryId(index)} />
         <Sort value={sortType} onChangeSort={(index) => setSortType(index)} />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
+      <div className="content__title-wrapper">
+        <h2 className="content__title">Все пиццы</h2>
+      </div>
       <div className="content__items">{isLoading ? skeletons : items}</div>
     </div>
   );

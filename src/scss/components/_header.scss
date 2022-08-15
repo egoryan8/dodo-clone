@@ -13,11 +13,15 @@
     align-items: center;
     justify-content: space-between;
 
-    @media (max-width: 645px) {
+    @media (max-width: 767px) {
       flex-direction: column;
 
+      .header__logo {
+        margin-bottom: 15px;
+      }
+
       .header__cart {
-        margin-top: 40px;
+        margin-top: 20px;
       }
     }
   }
@@ -42,6 +46,7 @@
 
     p {
       color: #7b7b7b;
+      max-width: 160px;
     }
   }
 }

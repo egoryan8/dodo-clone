@@ -33,14 +33,23 @@ body {
     padding-top: 20px;
   }
 
+  &__title-wrapper {
+    display: flex;
+    @media (max-width: 730px) {
+      justify-content: center;
+    }
+  }
   &__title {
     font-weight: 800;
     font-size: 38px;
     margin-top: 60px;
     margin-bottom: 50px;
+    width: fit-content;
+    padding-bottom: 5px;
+    border-bottom: 2px solid $orange;
 
     @media (max-width: 730px) {
-      text-align: center;
+      display: flex;
     }
   }
 
