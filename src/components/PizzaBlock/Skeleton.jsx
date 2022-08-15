@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const Skeleton = (props) => (
+const Skeleton = () => (
   <div className="pizza-block-wrapper">
     <ContentLoader
       className="pizza-block"
