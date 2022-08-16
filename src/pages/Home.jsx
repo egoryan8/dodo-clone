@@ -9,12 +9,12 @@ import Sort, { sortList } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import { SearchContext } from '../App';
-import { setCategory, setFilters } from '../redux/slices/filterSlice';
-import { setItems, fetchPizzas } from '../redux/slices/pizzaSlice';
+import { filterSelect, setCategory, setFilters } from '../redux/slices/filterSlice';
+import { fetchPizzas, pizzaSelect } from '../redux/slices/pizzaSlice';
 
 const Home = () => {
-  const { categoryId, sort } = useSelector((state) => state.filter);
-  const { items, status } = useSelector((state) => state.pizza);
+  const { categoryId, sort } = useSelector(filterSelect);
+  const { items, status } = useSelector(pizzaSelect);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);

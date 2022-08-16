@@ -38,6 +38,8 @@ export const pizzaSlice = createSlice({
   },
 });
 
+export const pizzaSelect = (state) => state.pizza;
+
 export const { setItems } = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;
