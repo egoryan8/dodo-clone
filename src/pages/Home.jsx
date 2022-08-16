@@ -10,41 +10,36 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import { SearchContext } from '../App';
 import { setCategory, setFilters } from '../redux/slices/filterSlice';
-import { setItems } from '../redux/slices/pizzaSlice';
+import { setItems, fetchPizzas } from '../redux/slices/pizzaSlice';
 
 const Home = () => {
   const { categoryId, sort } = useSelector((state) => state.filter);
-  const pizzas = useSelector((state) => state.pizza.items);
+  const { items, status } = useSelector((state) => state.pizza);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
   const { searchValue } = useContext(SearchContext);
-  const [isLoading, setIsLoading] = React.useState(true);
 
   const setCategoryId = (i) => {
     dispatch(setCategory(i));
   };
 
-  const fetchPizzas = async () => {
-    setIsLoading(true);
-
+  const getPizzas = async () => {
     const sortBy = sort.sortProperty.replace('-', '');
     const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `search=${searchValue}` : '';
 
-    const { data } = await axios.get(
-      `https://6295d76075c34f1f3b2280f4.mockapi.io/pizzas?${category}&sortBy=${sortBy}&order=${order}&${search}`,
+    dispatch(
+      fetchPizzas({
+        sortBy,
+        order,
+        category,
+        search,
+      }),
     );
-    try {
-      dispatch(setItems(data));
-    } catch (error) {
-      console.log('ERROR', error);
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   React.useEffect(() => {
@@ -61,7 +56,7 @@ const Home = () => {
     window.scrollTo(0, 0);
 
     if (!isSearch.current) {
-      fetchPizzas();
+      getPizzas();
     }
     isSearch.current = false;
   }, [categoryId, sort.sortProperty, searchValue]);
@@ -78,7 +73,7 @@ const Home = () => {
     isMounted.current = true;
   }, [categoryId, sort.sortProperty]);
 
-  const items = pizzas.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+  const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
   const skeletons = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
 
   return (
@@ -87,10 +82,20 @@ const Home = () => {
         <Categories value={categoryId} onChangeCategory={setCategoryId} />
         <Sort />
       </div>
+
       <div className="content__title-wrapper">
         <h2 className="content__title">Все пиццы</h2>
       </div>
-      <div className="content__items">{isLoading ? skeletons : items}</div>
+      {status === 'error' ? (
+        <div class="content__error">
+          <h2>
+            Произошла ошибка <icon>😕</icon>
+          </h2>
+          <p>Не удалось загрузить пиццы. Попробуйте повторить попытку позже</p>
+        </div>
+      ) : (
+        <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
+      )}
     </div>
   );
 };
