@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,19 +7,16 @@ import Categories from '../components/Categories';
 import Sort, { sortList } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
-import { SearchContext } from '../App';
 import { filterSelect, setCategory, setFilters } from '../redux/slices/filterSlice';
 import { fetchPizzas, pizzaSelect } from '../redux/slices/pizzaSlice';
 
 const Home = () => {
-  const { categoryId, sort } = useSelector(filterSelect);
+  const { categoryId, sort, searchValue } = useSelector(filterSelect);
   const { items, status } = useSelector(pizzaSelect);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
-
-  const { searchValue } = useContext(SearchContext);
 
   const setCategoryId = (i) => {
     dispatch(setCategory(i));
