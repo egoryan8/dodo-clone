@@ -10,16 +10,17 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import { SearchContext } from '../App';
 import { setCategory, setFilters } from '../redux/slices/filterSlice';
+import { setItems } from '../redux/slices/pizzaSlice';
 
 const Home = () => {
   const { categoryId, sort } = useSelector((state) => state.filter);
+  const pizzas = useSelector((state) => state.pizza.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
   const { searchValue } = useContext(SearchContext);
-  const [pizzas, setPizzas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
   const setCategoryId = (i) => {
@@ -34,11 +35,11 @@ const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `search=${searchValue}` : '';
 
-    const res = await axios.get(
+    const { data } = await axios.get(
       `https://6295d76075c34f1f3b2280f4.mockapi.io/pizzas?${category}&sortBy=${sortBy}&order=${order}&${search}`,
     );
     try {
-      setPizzas(res.data);
+      dispatch(setItems(data));
     } catch (error) {
       console.log('ERROR', error);
     } finally {
