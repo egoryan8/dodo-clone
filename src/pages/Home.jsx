@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -27,12 +28,13 @@ const Home = () => {
     const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `search=${searchValue}` : '';
-    fetch(
-      `https://6295d76075c34f1f3b2280f4.mockapi.io/pizzas?${category}&sortBy=${sortBy}&order=${order}&${search}`,
-    )
-      .then((res) => res.json())
-      .then((arr) => {
-        setPizzas(arr);
+
+    axios
+      .get(
+        `https://6295d76075c34f1f3b2280f4.mockapi.io/pizzas?${category}&sortBy=${sortBy}&order=${order}&${search}`,
+      )
+      .then((res) => {
+        setPizzas(res.data);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
