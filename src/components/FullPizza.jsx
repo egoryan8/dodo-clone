@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem, cartItemSelectById } from '../redux/slices/cartSlice';
+import Preloader from './Preloader';
 
 const FullPizza = () => {
   const { id } = useParams();
@@ -44,7 +45,7 @@ const FullPizza = () => {
   };
 
   if (!pizza) {
-    return 'Загрузка...';
+    return <Preloader />;
   }
 
   return (
