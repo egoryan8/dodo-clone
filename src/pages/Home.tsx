@@ -1,24 +1,24 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import qs from 'qs';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Categories from '../components/Categories';
-import Sort, {sortList} from '../components/Sort';
+import Sort, { sortList } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
-import {filterSelect, setCategory, setFilters} from '../redux/slices/filterSlice';
-import {fetchPizzas, pizzaSelect} from '../redux/slices/pizzaSlice';
+import { filterSelect, setCategory, setFilters } from '../redux/slices/filterSlice';
+import { fetchPizzas, pizzaSelect } from '../redux/slices/pizzaSlice';
 
-const Home = () => {
-  const {categoryId, sort, searchValue} = useSelector(filterSelect);
-  const {items, status} = useSelector(pizzaSelect);
+const Home: React.FC = () => {
+  const { categoryId, sort, searchValue } = useSelector(filterSelect);
+  const { items, status } = useSelector(pizzaSelect);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const setCategoryId = (i) => {
+  const setCategoryId = (i: number) => {
     dispatch(setCategory(i));
   };
 
@@ -27,8 +27,8 @@ const Home = () => {
     const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `search=${searchValue}` : '';
-
     dispatch(
+      //@ts-ignore
       fetchPizzas({
         sortBy,
         order,
@@ -43,7 +43,7 @@ const Home = () => {
       const params = qs.parse(window.location.search.substring(1));
       const sort = sortList.find((obj) => obj.sortProperty === params.sortProperty);
 
-      dispatch(setFilters({...params, sort}));
+      dispatch(setFilters({ ...params, sort }));
       isSearch.current = true;
     }
   }, []);
@@ -69,14 +69,14 @@ const Home = () => {
     isMounted.current = true;
   }, [categoryId, sort.sortProperty]);
 
-  const pizzas = items.map((obj) => (<PizzaBlock {...obj} key={obj.id}/>));
-  const skeletons = [...new Array(8)].map((_, index) => <Skeleton key={index}/>);
+  const pizzas = items.map((obj: any) => <PizzaBlock {...obj} key={obj.id} />);
+  const skeletons = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} onChangeCategory={setCategoryId}/>
-        <Sort/>
+        <Categories value={categoryId} onChangeCategory={setCategoryId} />
+        <Sort />
       </div>
 
       <div className="content__title-wrapper">
@@ -85,7 +85,7 @@ const Home = () => {
       {status === 'error' ? (
         <div className="content__error">
           <h2>
-            Произошла ошибка <icon>😕</icon>
+            Произошла ошибка <span>😕</span>
           </h2>
           <p>Не удалось загрузить пиццы. Попробуйте повторить попытку позже</p>
         </div>
