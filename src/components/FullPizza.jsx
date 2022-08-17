@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem, cartItemSelectById } from '../redux/slices/cartSlice';
 
 const FullPizza = () => {
   const { id } = useParams();
@@ -8,6 +10,10 @@ const FullPizza = () => {
   const [pizza, setPizza] = React.useState();
   const [activeSize, setActiveSize] = React.useState(0);
   const [activeType, setActiveType] = React.useState(0);
+  const dispatch = useDispatch();
+  const cartItem = useSelector(cartItemSelectById(id));
+  const addedCount = cartItem ? cartItem.count : 0;
+
   const typeNames = ['Тонкое', 'Традиционное'];
 
   React.useEffect(() => {
@@ -25,6 +31,18 @@ const FullPizza = () => {
     fetchPizzas();
   }, []);
 
+  const onClickAdd = () => {
+    const item = {
+      id: pizza.id,
+      name: pizza.name,
+      price: pizza.price,
+      imageUrl: pizza.imageUrl,
+      type: typeNames[activeType],
+      size: pizza.sizes[activeSize],
+    };
+    dispatch(addItem(item));
+  };
+
   if (!pizza) {
     return 'Загрузка...';
   }
@@ -32,8 +50,11 @@ const FullPizza = () => {
   return (
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
-        <img className="pizza-block__image" src={pizza.imageUrl} alt="Pizza" />
-        <h4 className="pizza-block__title">{pizza.name}</h4>
+        <div>
+          <h4 className="pizza-block__title">{pizza.name}</h4>
+          <img className="pizza-block__image" src={pizza.imageUrl} alt="Pizza" />
+        </div>
+
         <div className="pizza-block__selector">
           <ul>
             {pizza.types.map((typeId) => (
@@ -58,7 +79,7 @@ const FullPizza = () => {
         </div>
         <div className="pizza-block__bottom">
           <div className="pizza-block__price">от {pizza.price} ₽</div>
-          <button className="button button--outline button--add">
+          <button onClick={onClickAdd} className="button button--outline button--add">
             <svg
               width="12"
               height="12"
@@ -71,7 +92,7 @@ const FullPizza = () => {
               />
             </svg>
             <span>Добавить</span>
-            {/* {addedCount > 0 && <i>{addedCount}</i>} */}
+            {addedCount > 0 && <i>{addedCount}</i>}
           </button>
         </div>
       </div>
