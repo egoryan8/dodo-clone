@@ -6,23 +6,21 @@ import Cart from './pages/Cart';
 import NotFound from './pages/NotFound';
 import './scss/app.scss';
 import FullPizza from './components/FullPizza';
+import React from 'react';
 
+const App: React.FC = () => (
+  <div className="wrapper">
+    <Header />
+    <div className="content">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/pizza/:id" element={<FullPizza />} />
 
-function App() {
-  return (
-    <div className="wrapper">
-      <Header />
-      <div className="content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/pizza/:id" element={<FullPizza />} />
-
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
-  );
-}
+  </div>
+);
 
 export default App;

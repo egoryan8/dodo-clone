@@ -6,17 +6,16 @@ import { addItem, cartItemSelectById } from '../redux/slices/cartSlice';
 import Preloader from './Preloader';
 
 const FullPizza: React.FC = () => {
-
   const { id } = useParams();
 
   const [pizza, setPizza] = React.useState<{
-    name: string,
-    price: number,
-    imageUrl: string,
-    id: string,
-    sizes: [],
-    types: [],
-    size: string,
+    name: string;
+    price: number;
+    imageUrl: string;
+    id: string;
+    sizes: number[];
+    types: number[];
+    size: string;
   }>();
 
   const [activeSize, setActiveSize] = React.useState(0);
@@ -57,7 +56,6 @@ const FullPizza: React.FC = () => {
     dispatch(addItem(item));
   };
 
-
   return (
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
@@ -68,7 +66,7 @@ const FullPizza: React.FC = () => {
 
         <div className="pizza-block__selector">
           <ul>
-            {pizza.types.map((typeId:number) => (
+            {pizza.types.map((typeId: number) => (
               <li
                 key={typeId}
                 onClick={() => setActiveType(typeId)}
@@ -78,7 +76,7 @@ const FullPizza: React.FC = () => {
             ))}
           </ul>
           <ul>
-            {pizza.sizes.map((size:string, index) => (
+            {pizza.sizes.map((size: number, index) => (
               <li
                 key={size}
                 onClick={() => setActiveSize(index)}

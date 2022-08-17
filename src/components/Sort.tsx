@@ -27,9 +27,14 @@ const Sort: React.FC = () => {
     setOpen(false);
   };
 
+  type ClickOutside = MouseEvent & {
+    path: Node[];
+  };
+
   React.useEffect(() => {
-    const onClickHandle = (evt: any) => {
-      if (!evt.path.includes(sortRef.current)) {
+    const onClickHandle = (evt: MouseEvent) => {
+      const _event = evt as ClickOutside;
+      if (sortRef.current && !_event.path.includes(sortRef.current)) {
         setOpen(false);
       }
     };
