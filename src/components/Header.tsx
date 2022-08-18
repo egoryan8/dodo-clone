@@ -29,8 +29,12 @@ const Header: React.FC = () => {
             <Search />
             <div className="header__cart">
               <Link to="/cart" className="button button--cart">
-                <span>{totalPrice} ₽</span>
-                <div className="button__delimiter"></div>
+                {totalCount > 0 && (
+                  <>
+                    <span>{totalPrice} ₽</span>
+                    <div className="button__delimiter"></div>
+                  </>
+                )}
                 <svg
                   width="18"
                   height="18"
@@ -59,7 +63,7 @@ const Header: React.FC = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span>{totalCount}</span>
+                <span>{totalCount > 0 ? totalCount : ''}</span>
               </Link>
             </div>
           </>

@@ -5,7 +5,7 @@
   background-color: $orange;
   border-radius: 30px;
   padding: 10px 20px;
-  min-width: 100px;
+  min-width: max-content;
   text-align: center;
   cursor: pointer;
   transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
@@ -132,8 +132,10 @@
   &--cart {
     display: flex;
     align-items: center;
+    justify-content: center;
     line-height: 23px;
     padding: 10px 20px;
+    min-height: 48px;
 
     svg {
       margin-right: 8px;
