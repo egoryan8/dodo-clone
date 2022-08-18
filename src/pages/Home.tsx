@@ -19,9 +19,9 @@ const Home: React.FC = () => {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const setCategoryId = (i: number) => {
+  const setCategoryId = React.useCallback((i: number) => {
     dispatch(setCategory(i));
-  };
+  }, []);
 
   const getPizzas = async () => {
     const sortBy = sort.sortProperty.replace('-', '');
@@ -82,7 +82,7 @@ const Home: React.FC = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={setCategoryId} />
-        <Sort />
+        <Sort sort={sort} />
       </div>
 
       <div className="content__title-wrapper">
