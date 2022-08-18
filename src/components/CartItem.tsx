@@ -9,7 +9,7 @@ type CartItemProps = {
   count: number;
   imageUrl: string;
   type: string;
-  size: string;
+  size: number;
 };
 
 const CartItem: React.FC<CartItemProps> = ({ id, name, price, count, imageUrl, type, size }) => {
