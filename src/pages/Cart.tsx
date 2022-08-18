@@ -52,7 +52,7 @@ const Cart: React.FC = () => {
             </svg>
             Корзина
           </h2>
-          <div onClick={onCLickClear} className="cart__clear">
+          <button onClick={onCLickClear} className="cart__clear">
             <svg
               width="20"
               height="20"
@@ -86,7 +86,7 @@ const Cart: React.FC = () => {
             </svg>
 
             <span>Очистить корзину</span>
-          </div>
+          </button>
         </div>
         <div className="content__items">
           {items.map((item: any) => (
