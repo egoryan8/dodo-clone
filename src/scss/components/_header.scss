@@ -29,11 +29,12 @@
   &__logo {
     display: flex;
     @media (max-width: 383px) {
-      padding-left: 30px;
+      padding-left: 5px;
     }
 
     img {
       margin-right: 15px;
+      width: 80px;
     }
 
     h1 {

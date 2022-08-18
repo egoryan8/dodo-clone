@@ -5,6 +5,10 @@
   text-align: center;
   margin-bottom: 65px;
 
+  @media (max-width: 340px) {
+    padding: 0 15px;
+  }
+
   &-wrapper {
     display: flex;
     justify-content: center;

@@ -41,21 +41,21 @@ const Home: React.FC = () => {
     );
   };
 
-  React.useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1)) as unknown as SearchParams;
-      const sort = sortList.find((obj) => obj.sortProperty === params.sortBy);
+  // React.useEffect(() => {
+  //   if (window.location.search) {
+  //     const params = qs.parse(window.location.search.substring(1)) as unknown as SearchParams;
+  //     const sort = sortList.find((obj) => obj.sortProperty === params.sortBy);
 
-      dispatch(
-        setFilters({
-          searchValue: params.search,
-          categoryId: Number(params.category),
-          sort: sort || sortList[0],
-        }),
-      );
-      isSearch.current = true;
-    }
-  }, []);
+  //     dispatch(
+  //       setFilters({
+  //         searchValue: params.search,
+  //         categoryId: Number(params.category),
+  //         sort: sort || sortList[0],
+  //       }),
+  //     );
+  //     isSearch.current = true;
+  //   }
+  // }, []);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -66,17 +66,17 @@ const Home: React.FC = () => {
     isSearch.current = false;
   }, [categoryId, sort.sortProperty, searchValue]);
 
-  React.useEffect(() => {
-    if (isMounted.current) {
-      const queryString = qs.stringify({
-        sortProperty: sort.sortProperty,
-        categoryId: categoryId,
-      });
+  // React.useEffect(() => {
+  //   if (isMounted.current) {
+  //     const queryString = qs.stringify({
+  //       sortProperty: sort.sortProperty,
+  //       categoryId: categoryId,
+  //     });
 
-      navigate(`?${queryString}`);
-    }
-    isMounted.current = true;
-  }, [categoryId, sort.sortProperty]);
+  //     navigate(`?${queryString}`);
+  //   }
+  //   isMounted.current = true;
+  // }, [categoryId, sort.sortProperty]);
 
   const pizzas = items.map((obj: any) => <PizzaBlock {...obj} key={obj.id} />);
   const skeletons = [...new Array(8)].map((_, index) => <Skeleton key={index} />);
