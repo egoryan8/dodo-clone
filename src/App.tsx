@@ -2,11 +2,13 @@ import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Home from './pages/Home';
-import Cart from './pages/Cart';
-import NotFound from './pages/NotFound';
 import './scss/app.scss';
-import FullPizza from './components/FullPizza';
-import React from 'react';
+import React, { Suspense } from 'react';
+import Preloader from './components/Preloader';
+
+const Cart = React.lazy(() => import('./pages/Cart'));
+const NotFound = React.lazy(() => import('./pages/NotFound'));
+const FullPizza = React.lazy(() => import('./components/FullPizza'));
 
 const App: React.FC = () => (
   <div className="wrapper">
@@ -14,10 +16,30 @@ const App: React.FC = () => (
     <div className="content">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/pizza/:id" element={<FullPizza />} />
-
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="/cart"
+          element={
+            <Suspense fallback={<Preloader />}>
+              <Cart />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/pizza/:id"
+          element={
+            <Suspense fallback={<Preloader />}>
+              <FullPizza />
+            </Suspense>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<Preloader />}>
+              <NotFound />
+            </Suspense>
+          }
+        />
       </Routes>
     </div>
   </div>
