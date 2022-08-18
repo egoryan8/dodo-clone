@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { Pizza } from './pizzaSlice';
 
-type CartItem = {
+export type CartItem = {
   id: string;
   name: string;
   price: number;

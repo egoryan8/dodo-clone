@@ -21,7 +21,7 @@ const FullPizza: React.FC = () => {
   const [activeSize, setActiveSize] = React.useState(0);
   const [activeType, setActiveType] = React.useState(0);
   const dispatch = useDispatch();
-  const cartItem = useSelector(cartItemSelectById(id));
+  const cartItem = useSelector(cartItemSelectById(id || '0'));
   const addedCount = cartItem ? cartItem.count : 0;
 
   const typeNames = ['Тонкое', 'Традиционное'];
