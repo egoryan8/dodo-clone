@@ -2,8 +2,9 @@ import axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem, cartItemSelectById } from '../redux/slices/cartSlice';
 import Preloader from './Preloader';
+import { cartItemSelectById } from '../redux/cart/selectors';
+import { addItem } from '../redux/cart/slice';
 
 const FullPizza: React.FC = () => {
   const { id } = useParams();
