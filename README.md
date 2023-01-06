@@ -1,6 +1,6 @@
 # `React Pizza`
 ## ✍️ Описание ✍️
-React Pizza - веб приложение (SPA) интернет магазина пиццерии на ReactJs (аналог Додо Пицца)
+React Pizza - веб приложение, marketplace пиццерии на React / Redux / TypeScript
 
 ## ⚒️ Используемые технологии: ⚒️
 
