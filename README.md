@@ -1,6 +1,6 @@
-# `React Pizza`
+# `Dodo Clone`
 ## ✍️ Описание ✍️
-React Pizza - веб приложение, marketplace пиццерии на React / Redux / TypeScript
+Dodo clone - веб приложение, marketplace пиццерии на React / Redux / TypeScript
 
 ## ⚒️ Используемые технологии: ⚒️
 
